@@ -15,3 +15,10 @@ composer laravel new
 ```bash
 php artisan ser
 ```
+
+# Start downloaded project
+- Open terminal and type
+```bash
+composer i
+php artisan ser
+```
