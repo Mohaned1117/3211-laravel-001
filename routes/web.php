@@ -2,24 +2,71 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\UserController;
+// use App\Http\Controllers\CommentController;
+// use App\Http\Controllers\ServiceController;
+// use App\Http\Controllers\ItemController;
+use App\Http\Controllers\{
+    ProductController,
+// UserController,
+// CommentController,
+// ServiceController,
+// ItemController,
+};
 
-Route::get('about', function () {
-    return view('about');
-});
+Route::view('/', 'welcome');
 
-Route::get('/services/web', function (){
-    // return view('services/web-apps');
-    return view('services.web-apps');
-});
+Route::view('about', 'about');
 
-// Create the following routes with their respective views:
-// 1. Route: /contact -> View: contact.blade.php
-// 2. Route: /services -> View: services.blade.php
-// 3. Route: /portfolio -> View: portfolio.blade.php
-// 4. Route: /blog -> View: blog.blade.php
-// 5. Route: /faq -> View: faq.blade.php
-// 6. Route: /reports/annual -> View: reports/annual.blade.php
-// 7. Route: /reports/monthly -> View: reports/monthly.blade.php
+Route::view('services/web', 'services.web-apps');
+
+Route::redirect('contact', 'find-us', 301);
+
+Route::view('find-us', 'contact');
+
+Route::view('posts', 'posts.index');
+
+Route::get('posts/{post}', fn($post) => view('posts.view', ['post' => $post]));
+
+// Route::get('products', 'App\Http\Controllers\ProductController@index');
+// Route::get('products/{product}', 'App\Http\Controllers\ProductController@show');
+
+// Route::get('products', ['App\Http\Controllers\ProductController', 'index']);
+// Route::get('products/{product}', ['App\Http\Controllers\ProductController', 'show']);
+
+// Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
+// Route::get('products/{product}', [App\Http\Controllers\ProductController::class, 'show']);
+
+// Route::get('products', [ProductController::class, 'index']);
+// Route::get('products/{product}', [ProductController::class, 'show']);
+
+// Group multiple methods in a single Controller: SYNTAX
+// Route::controller(ProductController::class)->group(function () { });
+// Route::controller(ProductController::class)->group(function () {
+//     Route::get('products', 'index');
+//     Route::get('products/{product}', 'show');
+// });
+
+// Route::prefix('products')->controller(ProductController::class)->group(function () {
+//     Route::get('', 'index');
+//     Route::get('{product}', 'show');
+// });
+
+// Route::resource('products', ProductController::class);
+// Route::resource('users', UserController::class);
+// Route::resource('comments', CommentController::class);
+// Route::resource('services', ServiceController::class);
+// Route::resource('items', ItemController::class);
+
+Route::resources([
+    'products' => ProductController::class,
+]);
+
+// Create the following controllers
+// 'users' 
+// 'comments' 
+// 'services' 
+// 'items' 
+ 
+Route::fallback(fn() => view('404'));
