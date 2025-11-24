@@ -1,3 +1,8 @@
+# WAMP
+- https://wampserver.aviatechno.net/
+- https://wampserver.aviatechno.net/files/install/wampserver3.4.0_x64.exe
+- https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/
+
 # Install Laravel
 - Open CMD and type
 ```bash
