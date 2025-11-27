@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('reaction_types', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
-            $table->bigInteger('post_id');
+            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('reaction_types');
     }
 };

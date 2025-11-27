@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->longText('post_body');
             $table->string('thumbnail');
             $table->bigInteger('user_id');
+            $table->bigInteger('post_status_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
