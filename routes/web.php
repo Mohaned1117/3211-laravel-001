@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     InitController,
     ProductController,
-    // UserController,
+    UserController,
+// UserController,
     // CommentController,
     // ServiceController,
     // ItemController,
@@ -60,7 +61,9 @@ Route::get('posts/{post}', fn($post) => view('posts.view', ['post' => $post]));
 // Route::resource('services', ServiceController::class);
 // Route::resource('items', ItemController::class);
 
-Route::resources([]);
+Route::resources([
+    'users' => UserController::class
+]);
 
 // Create the following controllers
 // 'users' 
@@ -68,6 +71,14 @@ Route::resources([]);
 // 'services' 
 // 'items' 
 
-Route::get('init', [InitController::class, 'models']);
+Route::controller(InitController::class)->prefix('init')->group(
+    function () {
+        Route::get('models', 'models');
+        Route::get('seed', 'seed');
+        Route::get('db-fresh', 'dbFresh');
+        Route::get('db-fresh-seed', 'dbFreshSeed');
+    }
+);
+
 
 Route::fallback(fn() => view('404'));

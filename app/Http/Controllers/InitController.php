@@ -9,7 +9,34 @@ class InitController extends Controller
 {
     function models()
     {
-        // php artisan make:model Post -a
-        Artisan::call('make:model', ['name' => 'Post', '-a' => true]);
+        $models = [
+            'User',
+            'PostStatus',
+            'ReactionType',
+            'Post',
+            'Comment',
+            'Reply',
+            'Reaction'
+        ];
+        foreach ($models as $model) {
+            // php artisan make:model Post -a
+            Artisan::call('make:model', ['name' => $model, '-a' => true]);
+            sleep(1);
+        }
+    }
+
+    function seed()
+    {
+        Artisan::call('db:seed');
+    }
+
+    function dbFresh()
+    {
+        Artisan::call('migrate:fresh');
+    }
+
+    function dbFreshSeed()
+    {
+        Artisan::call('migrate:fresh', ['--seed' => true]);
     }
 }

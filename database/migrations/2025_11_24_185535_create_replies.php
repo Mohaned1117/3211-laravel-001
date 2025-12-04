@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +16,8 @@ return new class extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->text('reply');
-            $table->bigInteger('comment_id');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Comment::class)->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
