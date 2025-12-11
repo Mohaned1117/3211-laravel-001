@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\PostStatus;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +17,8 @@ return new class extends Migration {
             $table->string('post_title');
             $table->longText('post_body');
             $table->string('thumbnail');
-            $table->bigInteger('user_id');
-            $table->bigInteger('post_status_id');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(PostStatus::class)->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
